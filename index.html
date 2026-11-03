@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123b75">
+  <title>Bookflow | Business Setup</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Fallback: works if styles.css was saved next to index.html instead of in css/ -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="topbar"></div>
+
+  <div class="wrap">
+
+    <!-- Brand header: put your logo file at assets/bookflow-logo.png -->
+    <div class="brand">
+      <div class="logo">
+        <span>YOUR<br>LOGO</span>
+        <img src="images/bookflow.png" alt="Bookflow logo">
+      </div>
+      <div>
+        <small>Powered By adrikolab</small>
+      </div>
+    </div>
+
+    <main class="shell">
+
+      <header class="hero">
+        <div class="eyebrow">Business onboarding</div>
+        <h1>Let's get your business ready for bookings.</h1>
+        <p>Tell us about your business and how you work. We'll use these details to prepare a Bookflow experience that fits your services, team and customers.</p>
+        <div class="hero-note">✦ Usually takes 10–15 minutes</div>
+      </header>
+
+      <div class="progress-area">
+        <div class="progress-meta">
+          <span id="stepLabel">Step 1 of 6</span>
+          <span id="percent">17% complete</span>
+        </div>
+        <div class="track"><div class="bar" id="progress"></div></div>
+      </div>
+
+      <!-- IMPORTANT: Set the receiving email in js/main.js (RECEIVING_EMAIL). -->
+      <form id="setupForm" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="New Bookflow Business Setup Submission">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off">
+
+        <!-- ============ STEP 1: Business information ============ -->
+        <section class="step active">
+          <div class="section-kicker">01 / Your business</div>
+          <h2>Business information</h2>
+          <p class="hint">Start with the details customers will recognize and use to find your business.</p>
+
+          <div class="field">
+            <label>Business or company name <span class="required">*</span></label>
+            <input name="Business name" required placeholder="e.g. The Style Studio">
+          </div>
+          <div class="field">
+            <label>Business owner's full name <span class="required">*</span></label>
+            <input name="Owner name" required placeholder="Your full name">
+          </div>
+          <div class="field">
+            <label>Business email address <span class="required">*</span></label>
+            <input type="email" name="Business email" required placeholder="you@business.com">
+          </div>
+          <div class="field">
+            <label>Business phone number <span class="required">*</span></label>
+            <input type="tel" name="Business phone" required placeholder="+256...">
+          </div>
+          <div class="field">
+            <label>WhatsApp number</label>
+            <input type="tel" name="WhatsApp number" placeholder="+256...">
+          </div>
+          <div class="field">
+            <label>Country <span class="required">*</span></label>
+            <select name="Country" required>
+              <option value="">Choose your country</option>
+              <option>Uganda</option>
+              <option>Kenya</option>
+              <option>Tanzania</option>
+              <option>Rwanda</option>
+              <option>Nigeria</option>
+              <option>Ghana</option>
+              <option>South Africa</option>
+              <option>United States</option>
+              <option>United Kingdom</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>City or town <span class="required">*</span></label>
+            <input name="City or town" required placeholder="e.g. Kampala">
+          </div>
+          <div class="field">
+            <label>Physical business address</label>
+            <textarea name="Business address" placeholder="Street, building, area or directions"></textarea>
+          </div>
+          <div class="field">
+            <label>Business website (if available)</label>
+            <input type="url" name="Business website" placeholder="https://">
+          </div>
+          <div class="field">
+            <label>Upload your business logo</label>
+            <input type="file" name="Business logo" accept=".png,.jpg,.jpeg,.webp,.svg">
+          </div>
+          <div class="field">
+            <label>Briefly describe your business <span class="required">*</span></label>
+            <textarea name="Business description" required placeholder="What does your business do and who do you serve?"></textarea>
+          </div>
+        </section>
+
+        <!-- ============ STEP 2: Business type ============ -->
+        <section class="step">
+          <div class="section-kicker">02 / Business type</div>
+          <h2>What kind of business do you run?</h2>
+          <p class="hint">This helps us tailor the setup fields and booking experience to your industry.</p>
+
+          <div class="field">
+            <label>Business category <span class="required">*</span></label>
+            <select id="category" name="Business category" required>
+              <option value="">Select a category</option>
+              <option>Salon</option>
+              <option>Barbershop</option>
+              <option>Spa &amp; Wellness</option>
+              <option>Medical / Healthcare</option>
+              <option>Dental Clinic</option>
+              <option>Fitness / Gym</option>
+              <option>Consultancy</option>
+              <option>Repair &amp; Maintenance</option>
+              <option>Bakery</option>
+              <option>Restaurant / Food Services</option>
+              <option>Photography &amp; Creative Services</option>
+              <option>Education / Training</option>
+              <option>Cleaning Services</option>
+              <option>Automotive Services</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field hidden" id="otherCategory">
+            <label>Please specify your business type</label>
+            <input name="Other business category">
+          </div>
+          <div class="field">
+            <label>What do customers book or order from you? <span class="required">*</span></label>
+            <textarea name="Services or offerings overview" required placeholder="List the services, appointments, sessions or order types customers can book."></textarea>
+          </div>
+          <div class="field">
+            <label>How many services or offerings will you add initially?</label>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="Initial service count" value="1–5">1–5</label>
+              <label class="choice"><input type="radio" name="Initial service count" value="6–10">6–10</label>
+              <label class="choice"><input type="radio" name="Initial service count" value="11–20">11–20</label>
+              <label class="choice"><input type="radio" name="Initial service count" value="More than 20">More than 20</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Do prices vary by service?</label>
+            <div class="inline">
+              <label class="choice"><input type="radio" name="Different service prices" value="Yes">Yes</label>
+              <label class="choice"><input type="radio" name="Different service prices" value="No">No</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Do services have different durations or completion times?</label>
+            <div class="inline">
+              <label class="choice"><input type="radio" name="Different service durations" value="Yes">Yes</label>
+              <label class="choice"><input type="radio" name="Different service durations" value="No">No</label>
+              <label class="choice"><input type="radio" name="Different service durations" value="Not applicable">Not applicable</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Do you offer packages or promotions?</label>
+            <div class="inline">
+              <label class="choice"><input type="radio" name="Packages or promotions" value="Yes">Yes</label>
+              <label class="choice"><input type="radio" name="Packages or promotions" value="No">No</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Should customers choose a specific staff member when booking?</label>
+            <div class="inline">
+              <label class="choice"><input type="radio" name="Customer selects staff" value="Yes">Yes</label>
+              <label class="choice"><input type="radio" name="Customer selects staff" value="No">No</label>
+              <label class="choice"><input type="radio" name="Customer selects staff" value="Depends on service">Depends on service</label>
+              <label class="choice"><input type="radio" name="Customer selects staff" value="Not applicable">Not applicable</label>
+            </div>
+          </div>
+          <div class="note">You can add the exact name, price, duration and description of each service in your dashboard after setup, or include a detailed list in the next field.</div>
+          <div class="field">
+            <label>List your services with prices and durations, if known</label>
+            <textarea name="Service details" placeholder="Example: Haircut — UGX 20,000 — 30 minutes"></textarea>
+          </div>
+        </section>
+
+        <!-- ============ STEP 3: People & availability ============ -->
+        <section class="step">
+          <div class="section-kicker">03 / People &amp; availability</div>
+          <h2>Your team and working hours</h2>
+          <p class="hint">Tell us who provides your services and when customers can book.</p>
+
+          <div class="field">
+            <label>How is your business staffed? <span class="required">*</span></label>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="Staff arrangement" value="I work alone" required> I work alone</label>
+              <label class="choice"><input type="radio" name="Staff arrangement" value="I have a team"> I have a team</label>
+              <label class="choice"><input type="radio" name="Staff arrangement" value="Multiple branches and teams"> Multiple branches and teams</label>
+            </div>
+          </div>
+          <div id="staffFields" class="hidden">
+            <div class="field">
+              <label>How many staff members?</label>
+              <input type="number" min="1" name="Number of staff" placeholder="e.g. 5">
+            </div>
+            <div class="field">
+              <label>Staff details (name, role, contact and services handled)</label>
+              <textarea name="Staff details" placeholder="Add each team member on a new line."></textarea>
+            </div>
+          </div>
+          <div class="field">
+            <label>Do team members have different working schedules?</label>
+            <div class="inline">
+              <label class="choice"><input type="radio" name="Different staff schedules" value="Yes">Yes</label>
+              <label class="choice"><input type="radio" name="Different staff schedules" value="No">No</label>
+              <label class="choice"><input type="radio" name="Different staff schedules" value="Not applicable">Not applicable</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Business operating hours</label>
+            <p class="hint">Tick the days you are open and set the usual opening and closing times.</p>
+            <div class="days" id="days"></div> <!-- Filled by js/main.js -->
+          </div>
+          <div class="field">
+            <label>Do you have scheduled breaks?</label>
+            <div class="inline">
+              <label class="choice"><input type="radio" name="Scheduled breaks" value="Yes">Yes</label>
+              <label class="choice"><input type="radio" name="Scheduled breaks" value="No">No</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Do you operate on public holidays?</label>
+            <div class="inline">
+              <label class="choice"><input type="radio" name="Public holidays" value="Yes">Yes</label>
+              <label class="choice"><input type="radio" name="Public holidays" value="No">No</label>
+              <label class="choice"><input type="radio" name="Public holidays" value="Sometimes">Sometimes</label>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ STEP 4: Booking rules ============ -->
+        <section class="step">
+          <div class="section-kicker">04 / Booking rules</div>
+          <h2>How should bookings work?</h2>
+          <p class="hint">Choose the rules that match the way your business serves customers.</p>
+
+          <div class="field">
+            <label>How should bookings be confirmed? <span class="required">*</span></label>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="Booking confirmation" value="Automatically confirmed" required> Automatically confirmed</label>
+              <label class="choice"><input type="radio" name="Booking confirmation" value="Manual approval"> Manual approval</label>
+              <label class="choice"><input type="radio" name="Booking confirmation" value="Depends on service"> Depends on service</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>How far in advance can customers book?</label>
+            <select name="Advance booking window">
+              <option value="">Select an option</option>
+              <option>Same day only</option>
+              <option>Up to 1 day</option>
+              <option>Up to 3 days</option>
+              <option>Up to 7 days</option>
+              <option>Up to 14 days</option>
+              <option>Up to 30 days</option>
+              <option>More than 30 days</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Do you accept same-day bookings?</label>
+            <div class="inline">
+              <label class="choice"><input type="radio" name="Same-day bookings" value="Yes">Yes</label>
+              <label class="choice"><input type="radio" name="Same-day bookings" value="No">No</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>How much notice is required for cancellations?</label>
+            <select name="Cancellation notice">
+              <option value="">Select an option</option>
+              <option>Anytime</option>
+              <option>1 hour</option>
+              <option>3 hours</option>
+              <option>6 hours</option>
+              <option>12 hours</option>
+              <option>24 hours</option>
+              <option>48 hours</option>
+              <option>Other / To be discussed</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Can customers reschedule their bookings?</label>
+            <div class="inline">
+              <label class="choice"><input type="radio" name="Customer rescheduling" value="Yes">Yes</label>
+              <label class="choice"><input type="radio" name="Customer rescheduling" value="No">No</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Buffer time between appointments</label>
+            <select name="Appointment buffer">
+              <option value="">Select an option</option>
+              <option>No additional time</option>
+              <option>5 minutes</option>
+              <option>10 minutes</option>
+              <option>15 minutes</option>
+              <option>30 minutes</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Cancellation and refund policy</label>
+            <textarea name="Cancellation and refund policy" placeholder="Describe your policy"></textarea>
+          </div>
+          <div class="field">
+            <label>Late-arrival policy</label>
+            <textarea name="Late arrival policy" placeholder="What happens if a customer arrives late?"></textarea>
+          </div>
+        </section>
+
+        <!-- ============ STEP 5: Payments & communication ============ -->
+        <section class="step">
+          <div class="section-kicker">05 / Payments &amp; communication</div>
+          <h2>Payments and customer notifications</h2>
+          <p class="hint">Let us know how customers pay and how you want to keep them informed.</p>
+
+          <div class="field">
+            <label>Which payment methods do you accept?</label>
+            <div class="choice-grid">
+              <label class="choice"><input type="checkbox" name="Payment methods[]" value="Cash">Cash</label>
+              <label class="choice"><input type="checkbox" name="Payment methods[]" value="Mobile Money">Mobile Money</label>
+              <label class="choice"><input type="checkbox" name="Payment methods[]" value="Bank transfer">Bank transfer</label>
+              <label class="choice"><input type="checkbox" name="Payment methods[]" value="Debit or credit card">Debit / credit card</label>
+              <label class="choice"><input type="checkbox" name="Payment methods[]" value="Online payments">Online payments</label>
+              <label class="choice"><input type="checkbox" name="Payment methods[]" value="Other">Other</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Business currency</label>
+            <select name="Currency">
+              <option value="">Choose currency</option>
+              <option>UGX — Ugandan Shilling</option>
+              <option>USD — US Dollar</option>
+              <option>KES — Kenyan Shilling</option>
+              <option>TZS — Tanzanian Shilling</option>
+              <option>RWF — Rwandan Franc</option>
+              <option>NGN — Nigerian Naira</option>
+              <option>GHS — Ghanaian Cedi</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>When do customers pay?</label>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="Payment timing" value="Full payment before service">Full payment before service</label>
+              <label class="choice"><input type="radio" name="Payment timing" value="Partial deposit">Partial deposit</label>
+              <label class="choice"><input type="radio" name="Payment timing" value="After service">After service</label>
+              <label class="choice"><input type="radio" name="Payment timing" value="Depends on service">Depends on service</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Deposit amount or percentage, if applicable</label>
+            <input name="Deposit amount" placeholder="e.g. 20% or UGX 10,000">
+          </div>
+          <div class="field">
+            <label>Which customer notifications would you like?</label>
+            <div class="choice-grid">
+              <label class="choice"><input type="checkbox" name="Customer notifications[]" value="Email confirmations">Email confirmations</label>
+              <label class="choice"><input type="checkbox" name="Customer notifications[]" value="SMS reminders">SMS reminders</label>
+              <label class="choice"><input type="checkbox" name="Customer notifications[]" value="WhatsApp notifications">WhatsApp notifications (where supported)</label>
+              <label class="choice"><input type="checkbox" name="Customer notifications[]" value="Cancellation alerts">Cancellation alerts</label>
+              <label class="choice"><input type="checkbox" name="Customer notifications[]" value="Rescheduling alerts">Rescheduling alerts</label>
+              <label class="choice"><input type="checkbox" name="Customer notifications[]" value="Post-appointment follow-ups">Post-appointment follow-ups</label>
+              <label class="choice"><input type="checkbox" name="Customer notifications[]" value="Birthday messages">Birthday messages</label>
+              <label class="choice"><input type="checkbox" name="Customer notifications[]" value="Promotional messages">Promotional messages</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>When should appointment reminders be sent?</label>
+            <select name="Reminder timing">
+              <option value="">Choose reminder timing</option>
+              <option>30 minutes before</option>
+              <option>1 hour before</option>
+              <option>3 hours before</option>
+              <option>12 hours before</option>
+              <option>24 hours before</option>
+              <option>48 hours before</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Email for business booking notifications</label>
+            <input type="email" name="Notification email" placeholder="you@business.com">
+          </div>
+          <div class="field">
+            <label>Phone for business notifications</label>
+            <input type="tel" name="Notification phone" placeholder="+256...">
+          </div>
+        </section>
+
+        <!-- ============ STEP 6: Brand & finish ============ -->
+        <section class="step">
+          <div class="section-kicker">06 / Brand &amp; finish</div>
+          <h2>Make Bookflow yours</h2>
+          <p class="hint">A few final details will help us make your booking page feel like your business.</p>
+
+          <div class="field">
+            <label>Preferred brand colour</label>
+            <input name="Brand colour" placeholder="e.g. Royal blue or #2457A6">
+          </div>
+          <div class="field">
+            <label>Business slogan or tagline</label>
+            <input name="Business slogan" placeholder="Your brand message">
+          </div>
+          <div class="field">
+            <label>Upload business photos (optional)</label>
+            <input type="file" name="Business photos" accept="image/*" multiple>
+          </div>
+          <div class="field">
+            <label>Social media platforms</label>
+            <div class="choice-grid">
+              <label class="choice"><input type="checkbox" name="Social platforms[]" value="Facebook">Facebook</label>
+              <label class="choice"><input type="checkbox" name="Social platforms[]" value="Instagram">Instagram</label>
+              <label class="choice"><input type="checkbox" name="Social platforms[]" value="TikTok">TikTok</label>
+              <label class="choice"><input type="checkbox" name="Social platforms[]" value="LinkedIn">LinkedIn</label>
+              <label class="choice"><input type="checkbox" name="Social platforms[]" value="X">X</label>
+              <label class="choice"><input type="checkbox" name="Social platforms[]" value="None">None</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Social media links</label>
+            <textarea name="Social media links" placeholder="Paste your profile links"></textarea>
+          </div>
+          <div class="field">
+            <label>Do you have multiple business locations?</label>
+            <div class="inline">
+              <label class="choice"><input type="radio" name="Multiple locations" value="Yes">Yes</label>
+              <label class="choice"><input type="radio" name="Multiple locations" value="No">No</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Number of locations, if applicable</label>
+            <input type="number" min="1" name="Number of locations" placeholder="e.g. 2">
+          </div>
+          <div class="field">
+            <label>Will other people need access to your dashboard?</label>
+            <div class="inline">
+              <label class="choice"><input type="radio" name="Additional dashboard users" value="Yes">Yes</label>
+              <label class="choice"><input type="radio" name="Additional dashboard users" value="No">No</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Any other setup requirements or notes?</label>
+            <textarea name="Additional requirements" placeholder="Tell us anything else we should know"></textarea>
+          </div>
+
+          <div class="note"><strong>Account security:</strong> Do not enter your password here. Create your Bookflow password through the secure account registration process.</div>
+
+          <label class="consent">
+            <input type="checkbox" name="Information accuracy confirmation" value="Confirmed" required>
+            <span>I confirm that the information provided is accurate.</span>
+          </label>
+          <label class="consent">
+            <input type="checkbox" name="Setup authorization" value="Authorized" required>
+            <span>I authorize the Bookflow setup team to use these details to configure my business account.</span>
+          </label>
+          <label class="consent">
+            <input type="checkbox" name="Future updates confirmation" value="Confirmed" required>
+            <span>I understand that I can update my business information and settings later.</span>
+          </label>
+        </section>
+
+        <!-- ============ Navigation buttons ============ -->
+        <div class="nav">
+          <button class="btn secondary" type="button" id="back" disabled>← Back</button>
+          <button class="btn primary" type="button" id="next">Continue →</button>
+          <button class="btn primary hidden" type="submit" id="submit">Submit setup request →</button>
+        </div>
+      </form>
+    </main>
+
+    <div class="footer">A simpler way to manage appointments. <b>Bookflow by adrikolab.</b></div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <!-- Fallback: works if main.js was saved next to index.html instead of in js/ -->
+  <script>if (typeof RECEIVING_EMAIL === "adrikolab25@gmail.com") document.write('<script src="main.js"><\/script>');</script>
+</body>
+</html>
